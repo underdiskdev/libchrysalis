@@ -9,11 +9,11 @@ int main()
 	// Simple info display and checks
 	assert(chs_version_check() && "libchrysalis headers and implementation do not match");
 
-	CHS_Graphics_API_Info* gfx_api_info;
-	chs_get_graphics_api_info(gfx_api_info);
+	CHS_Graphics_API_Info gfx_api_info;
+	chs_get_graphics_api_info(&gfx_api_info);
 
-	printf("This libcrysalis implementation supports %s %s to %s %s\n",	gfx_api_info->name, gfx_api_info->oldest_version,
-																		gfx_api_info->name, gfx_api_info->latest_version);
+	printf("This libcrysalis implementation supports %s %s to %s %s\n",	gfx_api_info.name, gfx_api_info.oldest_version,
+																		gfx_api_info.name, gfx_api_info.latest_version);
 
 	// Configuration
 	CHS_Window_Config window_config = {

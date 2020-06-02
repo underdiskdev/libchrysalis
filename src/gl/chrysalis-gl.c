@@ -1,7 +1,6 @@
 #include <chrysalis.h>
 
-#include <GL/glew.h>
-#include <OpenGL/gl.h>
+#include "gl.h"
 
 /**
  * @brief Renderer Data unique for OpenGL

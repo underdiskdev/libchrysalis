@@ -31,7 +31,6 @@
 
 #include "gfx_api_info.h"
 #include "renderer.h"
-#include "event.h"
 #include "util.h"
 
 #define __CHRYSALIS_VERSION_MAJOR__ 1

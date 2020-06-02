@@ -13,6 +13,7 @@
 #pragma once
 
 #include <SDL2/SDL.h>
+#include <stdio.h>
 
 /**
  * @brief Represents an OS window
