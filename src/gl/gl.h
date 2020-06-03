@@ -12,13 +12,10 @@
 
 #include <GL/glew.h>
 
-#ifdef __unix__
-    #ifdef __APPLE__
-        #include <OpenGL/gl.h>
-    #else
-        #include <gl/GL.h>
-    #endif
-
+#ifdef __APPLE__
+    #include <OpenGL/gl.h>
+#elif defined(unix) || defined(__unix__) || defined(__unix)
+    #include <gl/GL.h>
 #elif defined(_WIN32) || defined(WIN32)
     #include <gl/GL.h>
 #endif
