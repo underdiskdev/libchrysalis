@@ -1,4 +1,4 @@
-#include <chrysalis.h>
+#include <chrysalis/chrysalis.h>
 
 #include "gl.h"
 
@@ -28,8 +28,6 @@ CHS_Renderer* chs_create_renderer(CHS_Renderer_Config* config, CHS_Window* windo
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
 	ret->window = window;
-
-	//ret->window->window = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN );
 
 	((CHS_Renderer_Data*)ret->data)->gl_context = SDL_GL_CreateContext(window->window);
 

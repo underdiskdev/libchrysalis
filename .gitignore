@@ -1,0 +1,7 @@
+build/
+buildjunk/
+.vscode/
+*.sln
+Makefile
+*.xcworkspace/
+.DS_Store
