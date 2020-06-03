@@ -69,7 +69,9 @@ project "chrysalis-gl"
 	}
 
 	postbuildcommands {
-		"{COPY} %{cfg.basedir}/include %{cfg.basedir}/build/include"
+		"{COPY} %{cfg.basedir}/include %{cfg.basedir}/build/include",
+		"cd %{cfg.basedir}/docs && doxygen",
+		"{MOVE} %{cfg.basedir}/docs/documentation %{cfg.basedir}/build/documentation"
 	}
 
 	filter "configurations:debug"
@@ -117,6 +119,7 @@ newaction {
 		os.rmdir("./buildjunk")
 		os.remove("./Makefile")
 		os.rmdir("./libchrysalis.xcworkspace")
+		os.rmdir("./docs/documentation")
 		os.remove("./libchrysalis.sln")
 		print("done")
 	end
