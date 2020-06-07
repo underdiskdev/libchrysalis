@@ -13,9 +13,6 @@
 #pragma once
 
 #include <SDL2/SDL.h>
-#include <stdio.h>
-
-#include "load.h"
 
 /**
  * @brief Represents an OS window
@@ -64,26 +61,15 @@ CHS_Window_Config {
 	int high_dpi_support;
 }	CHS_Window_Config;
 
-Uint32 (*__chs_get_additional_sdl_window_flags_funcptr)();
-void (*__chs_before_window_creation_funcptr)(CHS_Window_Config*);
-
-void chs_private_load_window_funcptr()
-{
-	__chs_get_additional_sdl_window_flags_funcptr = chs_private_load_symbol("chs_get_additional_sdl_window_flags");
-	__chs_before_window_creation_funcptr = chs_private_load_symbol("chs_before_window_creation");
-}
-
 /**
  * @brief Returns additional SDL window flag used for context creation
  */
-Uint32 chs_get_additional_sdl_window_flags()
-{ return (*__chs_get_additional_sdl_window_flags_funcptr)(); }
+Uint32 chs_get_additional_sdl_window_flags();
 
 /**
  * @brief Called just before creating a SDL Window
  */
-void chs_before_window_creation(CHS_Window_Config* config)
-{ return (*__chs_before_window_creation_funcptr)(config); }
+void chs_before_window_creation(CHS_Window_Config* config);
 
 /**
  * @brief Creates and initializes a CHS_Window

@@ -83,17 +83,14 @@ project "chrysalis-gl"
 
 project "sandbox"
 	location "buildjunk/makefiles/sandbox"
-	kind "WindowedApp" 
+	kind "ConsoleApp" 
 	language "C"
 	targetdir ("build/bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("buildjunk/obj/" .. outputdir .. "/%{prj.name}")
-	libdirs {
-		("build/lib/" .. outputdir .. "/chrysalis-gl"),
-	}
 	filter "system:macosx"
-		links { "OpenGL.framework", "SDL2", "chrysalis-gl" }
+		links { "OpenGL.framework", "SDL2" }
 	filter "system:windows" 
-		links { "opengl32", "SDL2", "chrysalis-gl" }
+		links { "opengl32", "SDL2" }
 	filter "system:linux"
 		--todo: Support linux
 	filter {}

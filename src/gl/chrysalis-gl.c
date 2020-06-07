@@ -1,4 +1,4 @@
-#include <chrysalis/chrysalis.h>
+#include <chrysalis_implementation/chrysalis.h>
 
 #include "gl.h"
 
@@ -61,12 +61,12 @@ void chs_renderer_display(CHS_Renderer* renderer)
 
 int chs_get_version_major()
 {
-	return 1;
+	return 0;
 }
   
  int chs_get_version_minor()
  {
-	 return 0;
+	 return 2;
  }
   
  int chs_get_version_patch()
@@ -103,13 +103,13 @@ void chs_before_window_creation(CHS_Window_Config* config)
 	SDL_GL_SetAttribute( SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE );
 }
 
-void chs_init()
+void chs_oninit()
 {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
         chs_die("Unable to initialize SDL");
 }
 
-void chs_quit()
+void chs_onexit()
 {
 	SDL_Quit();
 }

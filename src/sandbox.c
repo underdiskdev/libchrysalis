@@ -5,9 +5,9 @@
 int main()
 {
 	// Initialization, very important!
-	chs_init();
-	// Simple info display and checks
-	assert(chs_version_check() && "libchrysalis headers and implementation do not match");
+	// No need to provide a file extension. The file will be searched in the current
+	// executable directory
+	chs_init("libchrysalis-gl");
 
 	CHS_Graphics_API_Info gfx_api_info;
 	chs_get_graphics_api_info(&gfx_api_info);
