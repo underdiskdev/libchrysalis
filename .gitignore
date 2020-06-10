@@ -1,7 +1,8 @@
 build/
 buildjunk/
 .vscode/
+.vs/
+*.xcworkspace/
 *.sln
 Makefile
-*.xcworkspace/
 .DS_Store
