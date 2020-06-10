@@ -107,17 +107,17 @@ void chs_init(const char* implementation_str)
 
 	for (int i = path_len; i > 0; --i)
 	{
-		if (ret[i] == '/')
+		if (path[i] == '/')
 		{
-			ret[i] = '\0';
+			path[i] = '\0';
 			break;
 		}
 	}
 
-	strcat(ret, "/");
-	strcat(ret, chs_private_get_dylib_file_pre());
-	strcat(ret, implementation_str);
-	strcat(ret, chs_private_get_dylib_file_ext());
+	strcat(path, "/");
+	strcat(path, chs_private_get_dylib_file_pre());
+	strcat(path, implementation_str);
+	strcat(path, chs_private_get_dylib_file_ext());
 #endif
 
 	chs_private_load_library(path);
