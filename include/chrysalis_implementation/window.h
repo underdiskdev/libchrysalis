@@ -12,7 +12,10 @@
 
 #pragma once
 
+#include <stdio.h>
+#include <stdlib.h>
 #include <SDL2/SDL.h>
+#include "common.h"
 
 /**
  * @brief Represents an OS window
@@ -64,19 +67,19 @@ CHS_Window_Config {
 /**
  * @brief Returns additional SDL window flag used for context creation
  */
-Uint32 chs_get_additional_sdl_window_flags();
+CHRYSALIS_API_EXPORT Uint32 chs_get_additional_sdl_window_flags();
 
 /**
  * @brief Called just before creating a SDL Window
  */
-void chs_before_window_creation(CHS_Window_Config* config);
+CHRYSALIS_API_EXPORT void chs_before_window_creation(CHS_Window_Config* config);
 
 /**
  * @brief Creates and initializes a CHS_Window
  * @remark This function is implemented in the headers, but uses functions not implemented in the headers
  * @returns A valid CHS_Window pointer in case of success, NULL in case of failure
  */
-CHS_Window* chs_create_window(CHS_Window_Config* config)
+CHRYSALIS_API_EXPORT CHS_Window* chs_create_window(CHS_Window_Config* config)
 {
 	chs_before_window_creation(config);
 	CHS_Window* ret = (CHS_Window*)malloc(sizeof(CHS_Window));
@@ -101,7 +104,7 @@ CHS_Window* chs_create_window(CHS_Window_Config* config)
  * @brief Deletes a CHS_Window
  * @remark This function is implemented in the headers
  */
-void chs_delete_window(CHS_Window* window)
+CHRYSALIS_API_EXPORT void chs_delete_window(CHS_Window* window)
 {
 	free(window);
 }
@@ -110,7 +113,7 @@ void chs_delete_window(CHS_Window* window)
  * @brief Returns a unique number for each window
  * @remark This function is implemented in the headers
  */
-Uint32 chs_window_get_id(CHS_Window* window)
+CHRYSALIS_API_EXPORT Uint32 chs_window_get_id(CHS_Window* window)
 {
 	return SDL_GetWindowID(window->window);
 }

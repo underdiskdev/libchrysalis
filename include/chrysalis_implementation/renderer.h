@@ -69,30 +69,30 @@ CHS_Renderer_Config {
  * @details This field creates the renderer. It is also responsible of selecting/binding the
  * 			main framebuffer / backbuffer
  */
-CHS_Renderer* chs_create_renderer(CHS_Renderer_Config* config, CHS_Window* window);
+CHRYSALIS_API_EXPORT CHS_Renderer* chs_create_renderer(CHS_Renderer_Config* config, CHS_Window* window);
 
 /**
  * @brief Deletes a renderer
  * @param[in] renderer Pointer to the CHS_Renderer to destroy
  */
-void chs_delete_renderer(CHS_Renderer* renderer);
+CHRYSALIS_API_EXPORT void chs_delete_renderer(CHS_Renderer* renderer);
 
 /**
  * @brief Display image (swap buffers)
  * @param[in] renderer Pointer to the CHS_Renderer to display
  */
-void chs_renderer_display(CHS_Renderer* renderer);
+CHRYSALIS_API_EXPORT void chs_renderer_display(CHS_Renderer* renderer);
 
 /**
  * @brief Changes the color that gets drawn when calling chs_renderer_clear()
  * @param[in] renderer Pointer to the CHS_Renderer to change the clear color of
  * @param[in] color Color to display when clearing
  */
-void chs_renderer_set_clear_color(CHS_Renderer* renderer, CHS_Color color);
+CHRYSALIS_API_EXPORT void chs_renderer_set_clear_color(CHS_Renderer* renderer, CHS_Color color);
 
 /**
  * @brief Clears the screen with the color set using chs_renderer_set_clear_color()
  * @param[in] renderer Pointer to the CHS_Renderer to clear
  */
-void chs_renderer_clear(CHS_Renderer* renderer);
+CHRYSALIS_API_EXPORT void chs_renderer_clear(CHS_Renderer* renderer);
 

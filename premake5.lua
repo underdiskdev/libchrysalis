@@ -49,6 +49,7 @@ project "chrysalis-gl"
 
 	libdirs {
 		("buildjunk/lib/" .. outputdir .. "/glew"),
+		_OPTIONS["SDL2_lib_path"]
 	}
 
 	filter "system:macosx"
@@ -64,14 +65,21 @@ project "chrysalis-gl"
 		"src/gl/**.c"
 	}
 
+	defines {
+		"GLEW_STATIC",
+		"GLEW_NO_GLU"
+	}
+
 	includedirs {
-		"include"
+		"include",
+		"deps/glew/include",
+		_OPTIONS["SDL2_include_path"]
 	}
 
 	postbuildcommands {
-		"{COPY} %{cfg.basedir}/include %{cfg.basedir}/build/include",
-		"cd %{cfg.basedir}/docs && doxygen",
-		"{MOVE} %{cfg.basedir}/docs/documentation %{cfg.basedir}/build/documentation"
+		--"{COPY} %{cfg.basedir}/include %{cfg.basedir}/build/include",
+		--"cd %{cfg.basedir}/docs && doxygen",
+		--"{MOVE} %{cfg.basedir}/docs/documentation %{cfg.basedir}/build/documentation/"
 	}
 
 	filter "configurations:debug"
@@ -95,10 +103,15 @@ project "sandbox"
 		--todo: Support linux
 	filter {}
 	files {
-		"src/sandbox.c"
+		"src/sandbox.c",
+		"include/chrysalis/**.h"
+	}
+	libdirs {
+		_OPTIONS["SDL2_lib_path"]
 	}
 	includedirs {
-		"build/include"
+		"include",
+		_OPTIONS["SDL2_include_path"]
 	}
 	filter "configurations:debug"
 		defines "CHRYSALIS_DEBUG"
@@ -106,6 +119,18 @@ project "sandbox"
 	filter "configurations:release"
 		defines "CHRYSALIS_RELEASE"
 		symbols "off"
+
+newoption {
+	trigger     = "SDL2_include_path",
+	value       = "path",
+	description = "include directory where the SDL2 headers can be found"
+}
+
+newoption {
+	trigger     = "SDL2_lib_path",
+	value       = "path",
+	description = "lib directory where the SDL2 library can be found"
+}
 
 newaction {
 	trigger     = "clean",

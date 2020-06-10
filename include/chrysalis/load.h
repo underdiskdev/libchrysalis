@@ -13,11 +13,13 @@
 #pragma once
 
 #if defined( __APPLE__) || defined(unix) || defined(__unix__) || defined(__unix) // macOS and other Unix(-like) including linux
-	
+
 	#include "load_unix.h"
 
 #elif defined(_WIN32) || defined(WIN32) // Microsoft Windows (32 and 64 bits)
-	// todo: Support Microsoft Windows
+
+	#include "load_win32.h"
+	
 #else
 	#error libchrysalis currently only supports macOS, GNU/Linux or Microsoft Windows
 #endif

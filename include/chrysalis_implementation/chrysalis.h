@@ -32,6 +32,7 @@
 #include "gfx_api_info.h"
 #include "renderer.h"
 #include "util.h"
+#include "common.h"
 
 #define __CHRYSALIS_VERSION_MAJOR__ 0
 #define __CHRYSALIS_VERSION_MINOR__ 2
@@ -41,22 +42,26 @@
  * @brief Major version of the loaded libchrysalis implementation
  * @returns Major version number of the loaded libchrysalis implementation
  */
-int chs_get_version_major();
+CHRYSALIS_API_EXPORT int chs_get_version_major();
 
 /**
  * @brief Minor version of the loaded libchrysalis implementation
  * @returns Minor version number of the loaded libchrysalis implementation
  */
-int chs_get_version_minor();
+CHRYSALIS_API_EXPORT int chs_get_version_minor();
 
 /**
  * @brief Patch version of the loaded libchrysalis implementation
  * @returns Patch version number of the loaded libchrysalis implementation
  */
-int chs_get_version_patch();
+CHRYSALIS_API_EXPORT int chs_get_version_patch();
 
 /**
  * @brief Information about the graphics api
  * @param[out] info CHS_Graphics_API_Info pointer to write to
  */
-void chs_get_graphics_api_info(CHS_Graphics_API_Info* info);
+CHRYSALIS_API_EXPORT void chs_get_graphics_api_info(CHS_Graphics_API_Info* info);
+
+CHRYSALIS_API_EXPORT void chs_oninit();
+
+CHRYSALIS_API_EXPORT void chs_onexit();

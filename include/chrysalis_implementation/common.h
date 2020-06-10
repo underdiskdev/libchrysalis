@@ -15,7 +15,15 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-typedef bool _Bool; // _Bool is the C definition of the boolean type. let's use the bool keyword instead
+#if defined(_WIN32) || defined(WIN32)
+    #define CHRYSALIS_API_EXPORT __declspec( dllexport )
+#else
+    #define CHRYSALIS_API_EXPORT 
+#endif
+
+#ifndef bool
+    typedef _Bool bool; // _Bool is the C definition of the boolean type. let's use the bool keyword instead
+#endif
 typedef uint8_t u8;
 typedef int8_t i8;
 typedef uint16_t u16;

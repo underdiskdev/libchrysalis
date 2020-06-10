@@ -74,6 +74,18 @@ const char* chs_private_get_dylib_file_ext()
 	#endif
 }
 
+const char* chs_private_get_dylib_file_pre()
+{
+#ifdef __APPLE__
+	return "lib";
+#elif defined(_WIN32) || defined(WIN32)
+	return "";
+#elif defined(unix) || defined(__unix__) || defined(__unix)
+	return "lib"
+#endif
+}
+
+
 /**
  * @brief Inits libchrysalis
  */
@@ -81,6 +93,12 @@ void chs_init(const char* implementation_str)
 {
 
 	//dirty way of doing things... didn't find a good alternative. thanks to @Lazy_Monique for the help
+#if defined(_WIN32) || defined(WIN32)
+	char* path = (char*)malloc(80);
+	memset(path, 0, 80);
+	strcat(path, implementation_str);
+	strcat(path, chs_private_get_dylib_file_ext());
+#else
 	int path_len = wai_getExecutablePath(NULL, 0, NULL);
 	int dir_len;
 	char* path = (char*)malloc(path_len + 80);
@@ -89,27 +107,29 @@ void chs_init(const char* implementation_str)
 
 	for (int i = path_len; i > 0; --i)
 	{
-		if (path[i] == '/')
+		if (ret[i] == '/')
 		{
-			path[i] = '\0';
+			ret[i] = '\0';
 			break;
 		}
 	}
 
-	strcat(path, "/");
-	strcat(path, implementation_str);
-	strcat(path, chs_private_get_dylib_file_ext());
+	strcat(ret, "/");
+	strcat(ret, chs_private_get_dylib_file_pre());
+	strcat(ret, implementation_str);
+	strcat(ret, chs_private_get_dylib_file_ext());
+#endif
 
 	chs_private_load_library(path);
 
 	// CHRYSALIS.H
-	__chs_get_version_major_funcptr = chs_private_load_symbol("chs_get_version_major");
-	__chs_get_version_minor_funcptr = chs_private_load_symbol("chs_get_version_minor");
-	__chs_get_version_patch_funcptr = chs_private_load_symbol("chs_get_version_patch");
-	__chs_get_graphics_api_info_funcptr = chs_private_load_symbol("chs_get_graphics_api_info");
+	__chs_get_version_major_funcptr = (int(*)())chs_private_load_symbol("chs_get_version_major");
+	__chs_get_version_minor_funcptr = (int(*)())chs_private_load_symbol("chs_get_version_minor");
+	__chs_get_version_patch_funcptr = (int(*)())chs_private_load_symbol("chs_get_version_patch");
+	__chs_get_graphics_api_info_funcptr = (void(*)(CHS_Graphics_API_Info*))chs_private_load_symbol("chs_get_graphics_api_info");
 
-	__chs_oninit_funcptr = chs_private_load_symbol("chs_oninit");
-	__chs_onexit_funcptr = chs_private_load_symbol("chs_onexit");
+	__chs_oninit_funcptr = (void(*)())chs_private_load_symbol("chs_oninit");
+	__chs_onexit_funcptr = (void(*)())chs_private_load_symbol("chs_onexit");
 
 	chs_private_load_window_funcptr();
 	chs_private_load_renderer_funcptr();
@@ -130,8 +150,8 @@ void chs_init(const char* implementation_str)
  */
 void chs_quit()
 {
-	chs_private_close_library();
 	__chs_onexit_funcptr();
+	chs_private_close_library();
 }
 
 /**
